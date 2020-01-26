@@ -3,6 +3,11 @@
 #+SINCE:   v2.0.9
 #+STARTUP: inlineimages
 
+* NOTE
+
+This is an attempt to extract lookup from doom. I'm probably not going to use
+it, but it does seem to work. You probably shouldn't use it.
+
 * Table of Contents :TOC:
 - [[#description][Description]]
   - [[#module-flags][Module Flags]]
