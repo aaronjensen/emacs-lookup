@@ -69,8 +69,50 @@ DOCSTRING and BODY are as in `defun'.
          (dolist (target (cdr targets))
            (advice-add target (car targets) #',symbol))))))
 
+;;;###autoload
+(defun doom-region-active-p ()
+  "Return non-nil if selection is active.
+Detects evil visual mode as well."
+  (declare (side-effect-free t))
+  (or (use-region-p)
+      (and (bound-and-true-p evil-local-mode)
+           (evil-visual-state-p))))
+
+;;;###autoload
+(defun doom-thing-at-point-or-region (&optional thing prompt)
+  "Grab the current selection, THING at point, or xref identifier at point.
+Returns THING if it is a string. Otherwise, if nothing is found at point and
+PROMPT is non-nil, prompt for a string (if PROMPT is a string it'll be used as
+the prompting string). Returns nil if all else fails.
+NOTE: Don't use THING for grabbing symbol-at-point. The xref fallback is smarter
+in some cases."
+  (declare (side-effect-free t))
+  (cond ((stringp thing)
+         thing)
+        ((doom-region-active-p)
+         (buffer-substring-no-properties
+          (doom-region-beginning)
+          (doom-region-end)))
+        (thing
+         (thing-at-point thing t))
+        ((require 'xref nil t)
+         ;; A little smarter than using `symbol-at-point', though in most cases,
+         ;; xref ends up using `symbol-at-point' anyway.
+         (xref-backend-identifier-at-point (xref-find-backend)))
+        (prompt
+         (read-string (if (stringp prompt) prompt "")))))
+
 (defmacro use-package! (&rest ignore))
 (defmacro featurep! (&rest ignore)
   nil)
+
+(defun doom-log (&rest ignore))
+
+(defun doom-set-jump-a (orig-fn &rest args)
+  "Set a jump point and ensure ORIG-FN doesn't set any new jump points."
+  (better-jumper-set-jump (if (markerp (car args)) (car args)))
+  (let ((evil--jumps-jumping t)
+        (better-jumper--jumping t))
+    (apply orig-fn args)))
 
 (provide 'lookup-shim)

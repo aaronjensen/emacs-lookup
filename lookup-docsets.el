@@ -1,6 +1,8 @@
 ;;; tools/lookup/autoload/docsets.el -*- lexical-binding: t; -*-
 ;;;###if (featurep! +docsets)
 
+(require 'lookup-shim)
+
 (defvar dash-docs-docsets nil)
 
 ;;;###autoload

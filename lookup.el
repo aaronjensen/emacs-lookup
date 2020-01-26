@@ -1,5 +1,7 @@
 ;;; tools/lookup/autoload/lookup.el -*- lexical-binding: t; -*-
 
+(require 'lookup-shim)
+
 ;;;###autoload
 (defun set-lookup-handlers! (modes &rest plist)
   "Define jump handlers for major or minor MODES.
