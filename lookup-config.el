@@ -12,6 +12,8 @@
 ;; in the future. When xref can't be depended on it will fall back to
 ;; `dumb-jump' to find what you want.
 
+(require 'lookup-shim)
+
 (defvar +lookup-provider-url-alist
   (append '(("Doom Emacs issues" "https://github.com/hlissner/doom-emacs/issues?q=is%%3Aissue+%s")
             ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
