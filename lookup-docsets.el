@@ -3,7 +3,7 @@
 
 (defvar dash-docs-docsets nil)
 
-;;;###autodef
+;;;###autoload
 (defun set-docsets! (modes &rest docsets)
   "Registers a list of DOCSETS for MODES.
 
@@ -103,3 +103,5 @@ installed with `dash-docs-install-docset'."
   "TODO"
   (interactive)
   (+lookup/in-docsets t query))
+
+(provide 'lookup-docsets)

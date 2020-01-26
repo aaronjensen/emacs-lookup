@@ -20,3 +20,5 @@ install it if necessary)."
       (unless (dash-docs-docset-path selected)
         (+lookup/install-docset selected)))
     (+lookup/in-docsets query selected)))
+
+(provide 'lookup-evil)

@@ -1,6 +1,6 @@
 ;;; tools/lookup/autoload/lookup.el -*- lexical-binding: t; -*-
 
-;;;###autodef
+;;;###autoload
 (defun set-lookup-handlers! (modes &rest plist)
   "Define jump handlers for major or minor MODES.
 
@@ -342,3 +342,5 @@ Otherwise, falls back on `find-file-at-point'."
     (user-error "No offline dictionary implemented yet"))
   (message "Looking up synonyms for %S" identifier)
   (powerthesaurus-lookup-word-dwim))
+
+(provide 'lookup)

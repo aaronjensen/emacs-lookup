@@ -97,3 +97,5 @@ for the provider."
                (counsel-search-engine 'ddg))
            (call-interactively #'counsel-search)
            t))))
+
+(provide 'lookup-online)
